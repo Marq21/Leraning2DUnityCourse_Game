@@ -13,12 +13,15 @@ public class Player : MonoBehaviour
     public Main main;
     public GameObject deafultBullet;
     public GameObject tripleBullet;
-    public Transform shootPoint;
+    [SerializeField]
+    private Transform shootPoint;
     [SerializeField] float shootTiming;
     public SoundEffector effector;
     public BulletType bulletType = BulletType.DEFAULT;
-    public Transform bonusShootPoint;
-    [SerializeField] GameObject laser;
+    [SerializeField]
+    private Transform bonusShootPoint;
+    [SerializeField] 
+    private GameObject laser;
 
     public enum BulletType
     {
@@ -29,11 +32,9 @@ public class Player : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
+    { 
         rb = GetComponent<Rigidbody2D>();
         isAlive = true;
-        shootPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 1f, transform.position.z);
-        bonusShootPoint.transform.position = new Vector3(transform.position.x, transform.position.y + 0.7f, transform.position.z);
         StartCoroutine(Shooting());
     }
 
@@ -44,6 +45,7 @@ public class Player : MonoBehaviour
 
     void FixedUpdate()
     {
+        //Set object's speed
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime);
     }
 

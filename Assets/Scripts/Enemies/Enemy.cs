@@ -16,32 +16,36 @@ public class Enemy : MonoBehaviour
     [SerializeField]
     protected float rotationSpeed;
     protected SpriteRenderer spriteRenderer;
+    protected ShieldHandler shieldhandler;
 
     protected void Start()
     {
         audioSource = GetComponent<AudioSource>();
         rigidbody2 = GetComponent<Rigidbody2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
-        //Init rotation speed by sprite sizes
         rotationSpeed = Random.Range(10, 101);
+        shieldhandler = FindObjectOfType<ShieldHandler>();
     }
 
     protected void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Animator>().SetBool("dead", true);
-            collision.gameObject.GetComponent<Player>().Death(false);
-            audioSource.PlayOneShot(impact, destroyVolumeLevel);
-            DestroyMeteorWrap();
+            if (shieldhandler.Energy <= 0)
+            {
+                PlayerDeathProcessing(collision);
+                handleAsteroidDestroy();
+            } else
+            {
+                handleAsteroidDestroy();
+                shieldhandler.CheckEnergy();
+            }
         }
         else if (collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Laser")
         {
             if (gameObject.tag == "Asteroid")
             {
-                destroyedScore++;
-                audioSource.PlayOneShot(impact, destroyVolumeLevel);
-                DestroyMeteorWrap();
+                handleAsteroidDestroy();
             }
         }
     }
@@ -63,7 +67,7 @@ public class Enemy : MonoBehaviour
     {
         GetComponent<Animator>().SetBool("dead", true);
         GetComponent<Rigidbody2D>().bodyType = RigidbodyType2D.Static;
-        yield return new WaitForSeconds(1);
+        yield return new WaitForSeconds(0.5f);
         gameObject.SetActive(false);
     }
 
@@ -98,5 +102,12 @@ public class Enemy : MonoBehaviour
         collision.gameObject.GetComponent<Animator>().SetBool("dead", true);
         collision.gameObject.GetComponent<Player>().Death(false);
         audioSource.PlayOneShot(impact, destroyVolumeLevel);
+    }
+
+    private void handleAsteroidDestroy()
+    {
+        destroyedScore++;
+        audioSource.PlayOneShot(impact, destroyVolumeLevel);
+        DestroyMeteorWrap();
     }
 }

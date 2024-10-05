@@ -9,21 +9,28 @@ public class BonusEnemy : Enemy
     {
         if (collision.gameObject.tag == "Player")
         {
-            PlayerDeathProcessing(collision);
-            DestroyMeteorWrap();
+            if (shieldhandler.Energy <= 0)
+            {
+                PlayerDeathProcessing(collision);
+                handleAsteroidDestruction();
+            }
+            else
+            {
+                handleAsteroidDestruction();
+                shieldhandler.CheckEnergy();
+            }
         }
         else if (collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Laser")
         {
             if (gameObject.tag == "BonusAsteroid")
             {
-                destroyedScore += 2;
-                audioSource.PlayOneShot(impact, destroyVolumeLevel);
-                GameObject bonus = Instantiate(bonusObjects[Random.Range(0, bonusObjects.Length)],
-                                                            gameObject.transform.position,
-                                                            new Quaternion(0f, 0f, 0f, 1f));
-                gameObject.GetComponent<CircleCollider2D>().enabled = false;
-                DestroyMeteorWrap();
+                handleAsteroidDestruction();
             }
+        }
+        else if (collision.gameObject.tag == "EnergyShield")
+        {
+            handleAsteroidDestruction();
+            collision.gameObject.GetComponent<ShieldHandler>().CheckEnergy();
         }
     }
 
@@ -35,5 +42,16 @@ public class BonusEnemy : Enemy
             meteorPosition.transform.position = new Vector3(transform.position.x, transform.position.y - 0.1f, transform.position.z);
             time = 0;
         }
+    }
+
+    private void handleAsteroidDestruction()
+    {
+        destroyedScore += 2;
+        audioSource.PlayOneShot(impact, destroyVolumeLevel);
+        GameObject bonus = Instantiate(bonusObjects[Random.Range(0, bonusObjects.Length)],
+                                                    gameObject.transform.position,
+                                                    new Quaternion(0f, 0f, 0f, 1f));
+        gameObject.GetComponent<CircleCollider2D>().enabled = false;
+        DestroyMeteorWrap();
     }
 }

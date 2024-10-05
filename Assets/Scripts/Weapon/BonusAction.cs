@@ -14,12 +14,13 @@ public class BonusAction : MonoBehaviour
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.gameObject.tag == "Player")
-        {           
+        {
             player = collision.gameObject.GetComponent<Player>();
             if (gameObject.name == "LaserBonus(Clone)")
             {
                 player.bulletType = Player.BulletType.LASER;
-            } else if (gameObject.name == "TripleShotBonus(Clone)") 
+            } 
+            else if (gameObject.name == "TripleShotBonus(Clone)") 
             {
                 player.bulletType = Player.BulletType.TRIPLE;
             }           

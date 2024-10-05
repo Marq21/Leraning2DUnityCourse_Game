@@ -13,10 +13,17 @@ public class ArmoredEnemy : Enemy
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Animator>().SetBool("dead", true);
-            collision.gameObject.GetComponent<Player>().Death(false);
-            audioSource.PlayOneShot(impact, destroyVolumeLevel);
-            checkHp();
+            if (shieldhandler.Energy <= 0)
+            {
+                PlayerDeathProcessing(collision);
+                checkHp();
+            }
+            else
+            {
+                checkHp();
+                gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up);
+                shieldhandler.CheckEnergy();
+            }
         }
         else if (collision.gameObject.tag == "Projectile" || collision.gameObject.tag == "Laser")
         {
@@ -24,6 +31,11 @@ public class ArmoredEnemy : Enemy
             {
                 checkHp();
             }
+        }
+        else if (collision.gameObject.tag == "EnergyShield")
+        {
+            checkHp();
+            collision.gameObject.GetComponent<ShieldHandler>().CheckEnergy();
         }
     }
 
