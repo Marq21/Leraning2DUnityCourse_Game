@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    float speed = 6f;
+    [SerializeField] float speed = 6f;
     float timeToRemove = 4f;
     void Start()
     {

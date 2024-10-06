@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class TripleBullet : MonoBehaviour
 {
-    float speed = 6f;
+    [SerializeField] float speed = 10f;
     float timeToRemove = 4f;
     public GameObject leftBullet;
     public GameObject centerBullet;
