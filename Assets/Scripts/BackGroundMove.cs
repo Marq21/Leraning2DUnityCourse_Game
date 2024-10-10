@@ -4,18 +4,10 @@ using UnityEngine;
 
 public class BackGroundMove : MonoBehaviour
 {
-    public float speed = 0.5f;
-
-
-    void Start()
-    {
-
-    }
-
+    [SerializeField] private float speed = 0.5f;
 
     void Update()
     {
-        Vector2 offset = new Vector2(0, Time.time * speed);
-        GetComponent<Renderer>().material.mainTextureOffset = offset;
+        transform.Translate(Vector3.up * Time.deltaTime * speed);
     }
 }

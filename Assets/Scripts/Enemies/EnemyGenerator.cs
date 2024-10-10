@@ -22,7 +22,7 @@ public class EnemyGenerator : MonoBehaviour
     {
         posBonusEnemy = new Vector2(Random.Range(-8f, 8f), 5);
         StartCoroutine(GenerateAnotherWave());
-        StartCoroutine(WaitBonusEvent(Random.Range(12f, 40f)));
+        StartCoroutine(WaitBonusEvent(Random.Range(14f, 40f)));
         StartCoroutine(GenerateArmoredEnemy());
         enemiesPool = new List<GameObject>();
     }

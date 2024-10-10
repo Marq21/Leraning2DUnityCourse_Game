@@ -12,6 +12,15 @@ public class BotBorder : MonoBehaviour
         {
             Invoke("GameOver", 0.5f);
         }
+
+        switch (collision.gameObject.tag)
+        {
+            case "Asteroid":
+            case "ArmoredAsteroid":
+            case "BonusAsteroid":
+                Invoke("GameOver", 0.5f);
+                break;
+        }
     }
 
     public void GameOver()

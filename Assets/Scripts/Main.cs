@@ -10,12 +10,14 @@ public class Main : MonoBehaviour
     public GameObject pauseScreen;
     public GameObject gameOverScreen;
     public AudioSource musicSource, soundSource;
+    [SerializeField] private SoundEffector effector;
 
     public void GameOver()
     {
         Time.timeScale = 0f;
         player.enabled = false;
         gameOverScreen.SetActive(true);
+        effector.playLoseSound();
 
         //Saving Player Score after death
         if (PlayerPrefs.HasKey("playerScore"))

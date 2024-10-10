@@ -20,7 +20,6 @@ public class Player : MonoBehaviour
     [SerializeField]
     private Transform shootPoint;
     [SerializeField] float shootTiming;
-    public SoundEffector effector;
     public BulletType bulletType = BulletType.DEFAULT;
     [SerializeField]
     private Transform bonusShootPoint;
@@ -41,37 +40,15 @@ public class Player : MonoBehaviour
         StartCoroutine(Shooting());
     }
 
-    void Update()
-    {
-        Turn();
-    }
-
     void FixedUpdate()
     {
         //Set object's speed
         rb.velocity = new Vector2(Input.GetAxis("Horizontal") * speed * Time.deltaTime, Input.GetAxis("Vertical") * speed * Time.deltaTime);
     }
 
-    void Turn()
-    {
-        if (Input.GetAxis("Horizontal") == 0)
-        {
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 0, 179f));
-        }
-        if (Input.GetAxis("Horizontal") > 0)
-        {
-            transform.localRotation = Quaternion.Euler(new Vector3(0, 304f, 179f));
-        }
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            transform.localRotation = Quaternion.Euler(new Vector3(0, -304f, 179f));
-        }       
-    }
-
     public void Death(bool isAlive)
     {
         isAlive = false;
-        effector.playLoseSound();
         Invoke("GameOver", 1f);
     }
 
