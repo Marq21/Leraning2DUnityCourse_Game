@@ -4,6 +4,11 @@ using UnityEngine;
 
 public class ShieldHandler : MonoBehaviour
 {
+    /// <summary>
+    /// Class for working with shields mechanics.
+    /// </summary>
+    /// <param name="Energy">capacity of chield</param>
+    
     private int energy = 100;
     private bool isHit = false;
     private float impactVolumeLevel = 0.1f;

@@ -7,6 +7,10 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {
+    /// <summary>
+    /// Due to the nature of the player sprite, it was flipped 180 degrees.
+    /// This should be taken into account when changing the sprite.
+    /// </summary>
     Rigidbody2D rb;
     public float speed;
     bool isAlive;
@@ -30,7 +34,6 @@ public class Player : MonoBehaviour
         LASER,
     }
 
-    // Start is called before the first frame update
     void Start()
     { 
         rb = GetComponent<Rigidbody2D>();

@@ -12,6 +12,7 @@ TagManager:
   - ArmoredAsteroid
   - Laser
   - LaserBonus
+  - EnergyShield
   layers:
   - Default
   - TransparentFX
@@ -54,4 +55,7 @@ TagManager:
     locked: 0
   - name: BonusSprites
     uniqueID: 979033871
+    locked: 0
+  - name: UI
+    uniqueID: 4200572799
     locked: 0

@@ -21,7 +21,7 @@ public class ArmoredEnemy : Enemy
             else
             {
                 checkHp();
-                gameObject.GetComponent<Rigidbody2D>().AddForce(Vector2.up);
+                transform.position = new Vector3(transform.position.x, transform.position.y + 1f);
                 shieldhandler.CheckEnergy();
             }
         }

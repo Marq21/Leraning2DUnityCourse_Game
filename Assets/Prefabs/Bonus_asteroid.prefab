@@ -255,7 +255,6 @@ MonoBehaviour:
   impact: {fileID: 8300000, guid: b32d6cce000ff274192347285ca15269, type: 3}
   meteorPosition: {fileID: 8535027667644234601}
   rotationSpeed: 200
-  shieldHandler: {fileID: 6321740541954646412, guid: b050e8711ccb5f34f925affb47d16ccb, type: 3}
   bonusObjects:
   - {fileID: 8017135248107486205, guid: f73022f696ed7b3449b6ece6408f8076, type: 3}
   - {fileID: 5021215445699508027, guid: 0a3119ec11cf0d7439bd3404ec4585b0, type: 3}

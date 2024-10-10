@@ -63,6 +63,10 @@ public class Enemy : MonoBehaviour
         transform.Rotate(0, 0, rotationSpeed * Time.deltaTime);
     }
 
+    /// <summary>
+    /// Make object to inactive, change anination state for destroying animation
+    /// and change bodytype to static for prevent moving
+    /// </summary>
     IEnumerator DestroyMeteor()
     {
         GetComponent<Animator>().SetBool("dead", true);
@@ -71,6 +75,9 @@ public class Enemy : MonoBehaviour
         gameObject.SetActive(false);
     }
 
+    /// <summary>
+    /// Destroy meteor coroutine wrapper, for calling out of class
+    /// </summary>
     public void DestroyMeteorWrap()
     {
         StartCoroutine(DestroyMeteor());
@@ -104,6 +111,9 @@ public class Enemy : MonoBehaviour
         audioSource.PlayOneShot(impact, destroyVolumeLevel);
     }
 
+    /// <summary>
+    /// each enemy object can have own logic of destroying and scoring points
+    /// </summary>
     private void handleAsteroidDestroy()
     {
         destroyedScore++;
